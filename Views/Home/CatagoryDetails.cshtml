@@ -1,0 +1,31 @@
+@model Catagory
+
+<h1 class="mb-3 text-center">@Model.Name</h1>
+
+<div class="container-products">
+    <div class="right">
+        <h6 class="mb-3">Categories</h6>
+        @foreach(var product in Model.CatagoryAssociations)
+        {
+            <p>@product.Product.Name</p>
+        }
+    </div>
+
+    <div class="left">
+        <h6 class="mb-3">Add Product</h6>
+        <form asp-controller="Home" asp-action="AddProduct" asp-route-productID="@Model.CatagoryId" method="POST">
+            <div class="mb-3">
+                <span class="form-label text-danger font-weight-bold" asp-validation-for="Name"></span>
+                <select class="form-control" name="productId">
+                    @foreach (var item in @ViewBag.Products)
+                    {
+                        <option value="@item.ProductId">@item.Name</option>
+                    }
+                    
+
+                </select> 
+            </div>
+            <button class="btn btn-outline-success">Add</button>
+        </form>
+    </div>
+</div>

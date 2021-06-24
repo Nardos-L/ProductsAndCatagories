@@ -1,0 +1,32 @@
+@model Catagory
+<div class="text-center mt-3">
+    <a class="h4" asp-controller="Home" asp-action="Index">Products</a> |
+    <a class="h4" asp-controller="Home" asp-action="Categories">Categories</a>
+</div>
+
+<div class="container-products">
+    <div class="right">
+        <h6 class="mb-3">New Category</h6>
+        <form asp-controller="Home" asp-action="CreateCategory" method="POST">
+            <div class="mb-3">
+                <span class="form-label text-danger font-weight-bold" asp-validation-for="Name"></span>
+                <label class="form-label" asp-for="Name"></label>
+                <input class="form-control" asp-for="Name">
+            </div>
+            <button class="btn btn-outline-success">Create</button>
+        </form>
+    </div>
+    <div class="left">
+        <h6 class="mb-3 mx-4">Existing Category</h6>
+        @{
+            foreach(var category in ViewBag.allCategories)
+            {
+                <ul>
+                    <a asp-controller="Home" asp-action="CatagoryDetails" asp-route-catagoryId="@category.CatagoryId">@category.Name</a>
+                </ul>
+                
+            }
+        }
+        
+    </div>
+</div>
